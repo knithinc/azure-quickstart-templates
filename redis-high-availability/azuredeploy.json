@@ -1,6 +1,7 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "apiProfile": "2018-03-01-hybrid",
   "parameters": {
     "adminUsername": {
       "type": "string",
@@ -22,13 +23,6 @@
     },
     "location": {
       "type": "string",
-      "allowedValues": [
-        "West US",
-        "East US",
-        "East Asia",
-        "Southeast Asia",
-        "West Europe"
-      ],
       "metadata": {
         "description": "Location where resources will be provisioned"
       }
@@ -136,10 +130,9 @@
     "osFamilyUbuntu": {
       "imagePublisher": "Canonical",
       "imageOffer": "UbuntuServer",
-      "imageSKU": "14.04.2-LTS"
+      "imageSKU": "16.04.2-LTS"
     },
     "vmStorageAccountContainerName": "vhd-redis",
-    "vmStorageAccountDomain": ".blob.core.windows.net",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "scriptUrl": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/redis-high-availability/",
     "templateBaseUrl": "[variables('scriptUrl')]",
@@ -150,11 +143,6 @@
     "commonSettings": {
       "availabilitySetName": "redisAvailSet",
       "location": "[parameters('location')]"
-    },
-    "storageSettings": {
-      "vhdStorageAccountName": "[parameters('storageAccountName')]",
-      "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
-      "destinationVhdsContainer": "[concat('https://', parameters('storageAccountName'), variables('vmStorageAccountDomain'), '/', variables('vmStorageAccountContainerName'), '/')]"
     },
     "networkSettings": {
       "virtualNetworkName": "[parameters('virtualNetworkName')]",
@@ -190,7 +178,6 @@
     {
       "name": "shared-resources",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -202,7 +189,11 @@
             "value": "[variables('commonSettings')]"
           },
           "storageSettings": {
-            "value": "[variables('storageSettings')]"
+            "value": {
+              "vhdStorageAccountName": "[parameters('storageAccountName')]",
+              "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
+              "destinationVhdsContainer": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
+            }
           },
           "networkSettings": {
             "value": "[variables('networkSettings')]"
@@ -213,7 +204,6 @@
     {
       "name": "jumpbox-resources",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'shared-resources')]"
       ],
@@ -228,7 +218,11 @@
             "value": "[variables('commonSettings')]"
           },
           "storageSettings": {
-            "value": "[variables('storageSettings')]"
+            "value": {
+              "vhdStorageAccountName": "[parameters('storageAccountName')]",
+              "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
+              "destinationVhdsContainer": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
+            }
           },
           "networkSettings": {
             "value": "[variables('networkSettings')]"
@@ -245,7 +239,6 @@
     {
       "type": "Microsoft.Resources/deployments",
       "name": "[concat('node-resources', copyindex())]",
-      "apiVersion": "2015-01-01",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'shared-resources')]"
       ],
@@ -264,7 +257,11 @@
             "value": "[variables('commonSettings')]"
           },
           "storageSettings": {
-            "value": "[variables('storageSettings')]"
+            "value": {
+              "vhdStorageAccountName": "[parameters('storageAccountName')]",
+              "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
+              "destinationVhdsContainer": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
+            }
           },
           "networkSettings": {
             "value": "[variables('networkSettings')]"
@@ -289,7 +286,6 @@
     {
       "name": "lastnode-resources",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
       "dependsOn": [
         "memberNodesLoop"
       ],
@@ -304,7 +300,11 @@
             "value": "[variables('commonSettings')]"
           },
           "storageSettings": {
-            "value": "[variables('storageSettings')]"
+            "value": {
+              "vhdStorageAccountName": "[parameters('storageAccountName')]",
+              "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
+              "destinationVhdsContainer": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
+            }
           },
           "networkSettings": {
             "value": "[variables('networkSettings')]"
