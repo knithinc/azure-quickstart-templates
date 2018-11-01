@@ -125,7 +125,7 @@
     "osFamilyUbuntu": {
       "imagePublisher": "Canonical",
       "imageOffer": "UbuntuServer",
-      "imageSKU": "16.04.2-LTS"
+      "imageSKU": "16.04-LTS"
     },
     "scriptUrl": "https://raw.githubusercontent.com/knithinc/azure-quickstart-templates/master/redis-high-availability/",
     "templateBaseUrl": "[variables('scriptUrl')]",
