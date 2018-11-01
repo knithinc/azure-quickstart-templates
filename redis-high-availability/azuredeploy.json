@@ -127,7 +127,7 @@
       "imageOffer": "UbuntuServer",
       "imageSKU": "16.04.2-LTS"
     },
-    "scriptUrl": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/redis-high-availability/",
+    "scriptUrl": "https://raw.githubusercontent.com/knithinc/azure-quickstart-templates/master/redis-high-availability/",
     "templateBaseUrl": "[variables('scriptUrl')]",
     "jumpboxTemplateEnabled": "jumpbox-resources.json",
     "jumpboxTemplateDisabled": "empty-resources.json",
