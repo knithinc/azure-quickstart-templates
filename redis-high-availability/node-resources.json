@@ -1,6 +1,7 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "apiProfile": "2018-03-01-hybrid",
   "parameters": {
     "commonSettings": {
       "type": "object",
@@ -39,7 +40,6 @@
     {
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat('nicMember', parameters('machineSettings').machineIndex)]",
-      "apiVersion": "2015-05-01-preview",
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -59,7 +59,6 @@
     {
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat('vmMember', parameters('machineSettings').machineIndex)]",
-      "apiVersion": "2017-03-30",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/', 'nicMember', parameters('machineSettings').machineIndex)]"
@@ -96,7 +95,6 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat('vmMember', parameters('machineSettings').machineIndex, '/installscript')]",
-      "apiVersion": "2015-05-01-preview",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', 'vmMember', parameters('machineSettings').machineIndex)]"
