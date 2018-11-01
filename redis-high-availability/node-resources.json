@@ -15,6 +15,12 @@
         "Description": "Storage settings object"
       }
     },
+    "destinationStorageContainer": {
+      "type": "string",
+      "metadata": {
+        "Description": "Name of the destination storage container"
+      }      
+    },    
     "networkSettings": {
       "type": "object",
       "metadata": {
@@ -79,7 +85,7 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat(parameters('storageSettings').destinationVhdsContainer, 'node-os-disk' , parameters('machineSettings').machineIndex, '.vhd')]"
+              "uri": "[concat(parameters('destinationStorageContainer'), 'node-os-disk' , parameters('machineSettings').machineIndex, '.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"

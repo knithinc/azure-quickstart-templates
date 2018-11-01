@@ -15,6 +15,12 @@
         "Description": "Storage settings object"
       }
     },
+    "destinationStorageContainer": {
+      "type": "string",
+      "metadata": {
+        "Description": "Name of the destination storage container"
+      }      
+    },    
     "networkSettings": {
       "type": "object",
       "metadata": {
@@ -119,7 +125,7 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat(parameters('storageSettings').destinationVhdsContainer, 'jumpbox-os-disk.vhd')]"
+              "uri": "[concat(parameters('destinationStorageContainer'), 'jumpbox-os-disk.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"

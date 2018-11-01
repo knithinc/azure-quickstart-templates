@@ -15,6 +15,12 @@
         "Description": "Storage settings object"
       }
     },
+    "destinationStorageContainer": {
+      "type": "string",
+      "metadata": {
+        "Description": "Name of the destination storage container"
+      }      
+    },
     "networkSettings": {
       "type": "object",
       "metadata": {
@@ -25,11 +31,13 @@
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[concat(parameters('storageSettings').vhdStorageAccountName)]",
+      "name": "[parameters('destinationStorageContainer')]",
       "location": "[parameters('commonSettings').location]",
-      "properties": {
-        "accountType": "Standard_LRS"
-      }
+      "sku": {
+          "name": "[concat(parameters('storageSettings').storageAccountSKU)]"
+        },
+      "kind": "Storage",
+      "properties": {}
     },
     {
       "type": "Microsoft.Compute/availabilitySets",

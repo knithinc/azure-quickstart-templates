@@ -190,10 +190,13 @@
           },
           "storageSettings": {
             "value": {
+              "storageAccountSKU": "Standard_LRS",
               "vhdStorageAccountName": "[parameters('storageAccountName')]",
-              "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
-              "destinationVhdsContainer": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
+              "vhdContainerName": "[variables('vmStorageAccountContainerName')]"
             }
+          },
+          "destinationStorageContainer": {
+            "value": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
           },
           "networkSettings": {
             "value": "[variables('networkSettings')]"
@@ -219,10 +222,13 @@
           },
           "storageSettings": {
             "value": {
+              "storageAccountSKU": "Standard_LRS",
               "vhdStorageAccountName": "[parameters('storageAccountName')]",
-              "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
-              "destinationVhdsContainer": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
+              "vhdContainerName": "[variables('vmStorageAccountContainerName')]"
             }
+          },
+          "destinationStorageContainer": {
+            "value": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
           },
           "networkSettings": {
             "value": "[variables('networkSettings')]"
@@ -258,10 +264,13 @@
           },
           "storageSettings": {
             "value": {
+              "storageAccountSKU": "Standard_LRS",
               "vhdStorageAccountName": "[parameters('storageAccountName')]",
-              "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
-              "destinationVhdsContainer": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
+              "vhdContainerName": "[variables('vmStorageAccountContainerName')]"
             }
+          },
+          "destinationStorageContainer": {
+            "value": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
           },
           "networkSettings": {
             "value": "[variables('networkSettings')]"
@@ -301,10 +310,13 @@
           },
           "storageSettings": {
             "value": {
+              "storageAccountSKU": "Standard_LRS",
               "vhdStorageAccountName": "[parameters('storageAccountName')]",
-              "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
-              "destinationVhdsContainer": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
+              "vhdContainerName": "[variables('vmStorageAccountContainerName')]"
             }
+          },
+          "destinationStorageContainer": {
+            "value": "[concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/')]"
           },
           "networkSettings": {
             "value": "[variables('networkSettings')]"
