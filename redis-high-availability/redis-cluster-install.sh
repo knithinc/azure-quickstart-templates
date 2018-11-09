@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 # Script parameters and their defaults
-VERSION="3.0.0"
+VERSION="stable"
 CLUSTER_NAME="redis-cluster"
 IS_LAST_NODE=0
 IS_CLUSTER_AWARE=0
@@ -81,7 +81,7 @@ while getopts :n:v:c:m:s:i:p:lh optname; do
 		;;
     v)  # Version to be installed
 		VERSION=${OPTARG}
-		if [[ $VERSION == 3.* ]]; then IS_CLUSTER_AWARE=1; fi
+		if [[ $VERSION == stable ]]; then IS_CLUSTER_AWARE=1; fi
 		;;
 	c) # Number of instances
 		INSTANCE_COUNT=${OPTARG}
