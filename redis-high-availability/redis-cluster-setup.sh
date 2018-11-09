@@ -55,7 +55,7 @@ expand_ip_range() {
 
     declare -a EXPAND_STATICIP_RANGE_RESULTS=()
 	
-    for (( n=0 ; n<("${HOST_IPS[1]}"+0) ; n++))
+    for (( n=0 ; n<${HOST_IPS[1]} ; n++))
     do
         HOST="${HOST_IPS[0]}${n}:${REDIS_PORT}"
 		EXPAND_STATICIP_RANGE_RESULTS+=($HOST)
