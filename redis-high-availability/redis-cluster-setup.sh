@@ -101,13 +101,14 @@ done
 
 log "Configuring Redis cluster on ${INSTANCE_COUNT} nodes with ${SLAVE_COUNT} slave(s) for every master node"
 
+redis-cli --cluster create $(expand_ip_range "${IP_PREFIX}-${INSTANCE_COUNT}") --cluster-replicas ${SLAVE_COUNT}
 # Install the Ruby runtime that the cluster configuration script uses
-apt-get -y install ruby-full
+#apt-get -y install ruby-full
 
 # Install the Redis client gem (a pre-requisite for redis-trib.rb)
-gem install redis
+#gem install redis
 
 # Create a cluster based upon the specified host list and replica count
-echo "yes" | /usr/local/bin/redis-trib.rb create --replicas ${SLAVE_COUNT} $(expand_ip_range "${IP_PREFIX}-${INSTANCE_COUNT}")
+#echo "yes" | /usr/local/bin/redis-trib.rb create --replicas ${SLAVE_COUNT} $(expand_ip_range "${IP_PREFIX}-${INSTANCE_COUNT}")
 
 log "Redis cluster was configured successfully"
